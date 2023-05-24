@@ -1,6 +1,6 @@
 body {
     /* Barva pozadí stránky */
-    background-image: linear-gradient(to bottom right, hsl(0, 0%, 9%), hsl(0, 0%, 25%));
+    background-image: linear-gradient(to bottom right, hsl(0, 0%, 0%), hsl(0, 0%, 21%));
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
@@ -16,9 +16,85 @@ a:link { text-decoration: none; }
 a:visited { text-decoration: none; }
 a:hover { text-decoration: none; }
 a:active { text-decoration: none; }
-a { color:  hsl(0, 0%, 90%);}
+a {
+  color:  hsl(0, 0%, 90%);
+}
+
+h1 {
+  text-align: center;
+}
+
+.shop {
+  margin-right: 10%;
+  padding: 0.5%;
+  padding-top: 0.5%;
+  width: 10,5vw;
+  height: 59vh;
+  box-shadow: 1px 1px 3px rgb(230, 230, 230);
+  overflow-y: auto;
+}
+
+.capyButton {
+  display: flex;
+  justify-content: center;
+}
+
+.capyButton img {
+  height: 33%;
+  width: 33%;
+  margin-right: 27%;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10%;
+  user-select: none;
+}
 
 img {
-    height: 40%;
-    width: 40%;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-user-drag: none;
+  -webkit-touch-callout: none;
+}
+
+button {
+    /* barva buttonů */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 5px 30px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Roboto', sans-serif;
+  border-radius: 40px;
+  margin-bottom: 3%;
+  min-width: 210px;
+
+  background: #6E6D70;
+  box-shadow: 0px 0.5px 1px rgba(255, 19, 19, 0.1), inset 0px 0.5px 0.5px rgba(0, 0, 0, 0.5), 0px 0px 0px 0.5px rgba(0, 0, 0, 0.12);
+  color: #DFDEDF;
+}
+
+button:hover {
+  animation: changeColors 4s infinite;
+}
+
+@keyframes changeColors {
+  0% {
+    box-shadow: inset 0px 0.8px 0px -0.25px red, 0px 0.5px 1px red, 0px 0px 0px 3.5px rgb(255, 29, 29);
+  }
+  20% {
+    box-shadow: inset 0px 0.8px 0px -0.25px yellow, 0px 0.5px 1px yellow, 0px 0px 0px 3.5px yellow;
+  }
+  40% {
+    box-shadow: inset 0px 0.8px 0px -0.25px blue, 0px 0.5px 1px blue, 0px 0px 0px 3.5px blue;
+  }
+  60% {
+    box-shadow: inset 0px 0.8px 0px -0.25px purple, 0px 0.5px 1px purple, 0px 0px 0px 3.5px purple;
+  }
+  80% {
+    box-shadow: inset 0px 0.8px 0px -0.25px lime, 0px 0.5px 1px lime, 0px 0px 0px 3.5px lime;
+  }
+  100% {
+    box-shadow: inset 0px 0.8px 0px -0.25px red, 0px 0.5px 1px red, 0px 0px 0px 3.5px rgb(255, 29, 29);
+  }
 }

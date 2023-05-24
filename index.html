@@ -5,21 +5,25 @@
         <script src="js\capygenerator.js"></script>
         <link href="css\index.css" rel="stylesheet" type="text/css">
     </head>
-
     <body>
         <header>
             <div class="sound"></div>
-            <div class="galerry"><a href="html/shop.html">Home</a></div>
+            <a href="html/about.html">zpět na úvodní stranu</a>
         </header>
         <main>
-            <p>Skóre <span id="score">0</span></p>
-            <img onclick="addScore(1)"src="imgs/Melon seekers.png">
-            <button id="capy_button">Kup jsi novou kapybaru! <span id="capy_price">0</span></button>
-            <button id="emoji_button">Kup jsi nové emoji! <span id="capy_price">0</span></button>
-            <button id="cursor_button">Kup jsi nový kurzor! <span id="capy_price">0</span></button>
+            <div class="stats">
+                <h1><p>Skóre <span id="score">0</span></p></h1>
+            </div>
+            <ul>
+                <div class="capyButton">
+                    <div class="shop">
+                        <button id="emojiButton" onclick="buyEmoji();">Kup si nové emoji! <span id="emojiCost">25</span></button>
+                        <button onclick="woodStrenght.buyStrenght();">Kup jsi dřevěnou sílu! <span id="woodStrenghtCost">15</span></button>
+                        <button onclick="woodCursor.buyCursor();">Kup si dřevěný kurzor! <span id="woodCursorCost">15</span></button>
+                    </div>
+                    <img id="capyImg" onclick="addScore(1, true, '1')"src="imgs/Fancybara.png">
+                </div>
+            </ul>
         </main>
-        <footer>
-            feet
-        </footer>
     </body>
 </html>
