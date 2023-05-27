@@ -12,6 +12,45 @@ body {
     font-weight: 100;
 }
 
+/* box */
+.shop {
+  margin-right: 10%;
+  padding: 0.5%;
+  padding-top: 0.5%;
+  width: 10,5vw;
+  height: 20vh;
+  box-shadow: 1px 1px 3px rgb(230, 230, 230);
+  overflow-y: auto;
+}
+
+/* container obrazek */
+.capyButton {
+  display: flex;
+  justify-content: center;
+}
+
+/* obrazek */
+.capyButton img {
+  height: 33%;
+  width: 33%;
+  margin-right: 27%;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10%;
+  user-select: none;
+}
+
+/* scroll bar */
+::-webkit-scrollbar  {
+  width: 20px;
+  background-color: rgb(0, 0, 0);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgb(255, 255, 255);
+  height: 0.0001px;
+}
+
 a:link { text-decoration: none; }
 a:visited { text-decoration: none; }
 a:hover { text-decoration: none; }
@@ -22,31 +61,6 @@ a {
 
 h1 {
   text-align: center;
-}
-
-.shop {
-  margin-right: 10%;
-  padding: 0.5%;
-  padding-top: 0.5%;
-  width: 10,5vw;
-  height: 59vh;
-  box-shadow: 1px 1px 3px rgb(230, 230, 230);
-  overflow-y: auto;
-}
-
-.capyButton {
-  display: flex;
-  justify-content: center;
-}
-
-.capyButton img {
-  height: 33%;
-  width: 33%;
-  margin-right: 27%;
-  justify-content: center;
-  align-items: center;
-  border-radius: 10%;
-  user-select: none;
 }
 
 img {

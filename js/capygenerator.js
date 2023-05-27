@@ -5,10 +5,11 @@ var emojiCost = 25;
 var iron = false
 var gold = false
 var diamond = false
+var bonus = []
 
-var locked_emojis = ["🥥","🍉", "🍈", ""]
+var locked_emojis = ["🥥","🍉", "🍈", "🥑", "🍌", "🍑", "🍒", "🌵"]
 var unlocked_emojis = ["🍊"]
-
+const rewards = [10000, "2x", "3x", "4x", 20000, 420, 69, 42]
 const capys = ["Fancybara.png", "Galileo Capybei.png", "Jesus capy.png", "king capy.png", "Mona bara.png", "Van Gogh capy.png"]
 
 function Cursor(name, cursorNumber, cursorCost, cost, strenght, tier) {
@@ -158,7 +159,7 @@ function addScore(amount, user) {
         diamond = true;
     }
     else if(score >= 1_000_000_000) {
-        alert("git gud");
+        alert("penis");
         score = 0; 
         for (let i=0; i <= strenghts.length; i++) {
             cursors[i].cursorNumber = 0;
@@ -174,8 +175,65 @@ function calculateStrenght() {
     }
 }
 
+function giftReward() {
+    let reward = rewards[Math.floor(Math.random() * rewards.length)]
+    if (typeof(reward) == "number") {
+        score += reward
+    } else if (reward.indexOf("x")) {
+        bonus = [parseInt(reward.substring(0, str.length - 1)), 60]
+    }
+}
+
+function spawnGift() {
+    //let gift = document.createElement('div');
+
+    //x = Math.floor(Math.random() * window.innerWidth);
+    //y = Math.floor(Math.random() * window.innerHeight);
+
+    //gift.textContent = ""
+    //gift.style.top = y.toString() + "px";
+    //gift.style.left = x.toString() + "px";
+    //gift.addEventListener("click", function(){giftReward();});
+    //
+    //document.body.appendChild(gift);
+    //
+    //new Promise(resolve => setTimeout(resolve, 10)).then(() => {
+    //    gift.style.top = '0';
+    //    gift.style.opacity = '0';
+    //}).then(() => {
+    //    new Promise(resolve => setTimeout(resolve, 2000)).then(() => {
+    //        gift.remove();
+    //    });
+    //});    
+    let gift = document.createElement('div');
+
+    let websiteWidth = window.innerWidth;
+    let websiteHeight = window.innerHeight;
+    gift.style.top = Math.floor(Math.random() * websiteHeight).toString() + "px";
+    gift.style.left = Math.floor(Math.random() * websiteWidth).toString() + "px";
+    
+    gift.innerText = "⭐";
+    gift.style.position = 'absolute';
+    gift.style.opacity = '1';
+    gift.style.transition = 'all 2s linear';
+    gift.style.userSelect = 'none';
+    gift.addEventListener("click", function(){giftReward();});
+
+    document.body.appendChild(gift);
+
+    new Promise(resolve => setTimeout(resolve, 100)).then(() => {
+        gift.style.top = '0';
+    }).then(() => {
+        new Promise(resolve => setTimeout(resolve, 2000)).then(() => {
+            gift.remove();
+        });
+    });
+}
 setInterval(function() {
         calculateStrenght();
+        if (bonus[1] > 0) {
+            strenght *= bonus[0]
+        }
         for (let i = 0; i <= cursors.length-1; i++) {
             addScore(cursors[i].cursorNumber, false);
             document.getElementById("score").innerHTML = score;
@@ -184,4 +242,7 @@ setInterval(function() {
 
 setInterval(function() {
     document.getElementById("capyImg").src = "../imgs/"+capys[Math.floor(Math.random() * capys.length)]
-}, 60000)
+    if (Math.floor(Math.random() * 100) > 1) {
+        spawnGift();
+    }
+}, 1000)
