@@ -2,18 +2,17 @@ var score = 0;
 var strenght = 1;
 var emojiCost = 25;
 
-var iron = false
-var gold = false
-var diamond = false
+var giftId = 0
 
 var locked_emojis = ["🥥","🍉", "🍈", "🥑", "🍌", "🍑", "🍒", "🌵"]
 var unlocked_emojis = ["🍊"]
 
 var bonus = []
-//const rewards = [10000, "2x", "3x", "4x", 20000, 420, 69, 42]
+const rewards = [10000, "2x", "3x", "4x", 20000, 420, 69, 42]
 
 const cost = 2
 const capys = ["Fancybara.png", "Galileo Capybei.png", "Jesus capy.png", "king capy.png", "Mona bara.png", "Van Gogh capy.png"]
+
 
 function Cursor(name, cursorNumber, cursorCost, cost, strenght, tier) {
     this.name = name;
@@ -74,15 +73,6 @@ function buyEmoji() {
     }
 }
 
-const tiers = [
-    new Tier(15, 1, "wood"),
-    new Tier(50, 3, "stone"),
-    new Tier(100, 5, "iron"),
-    new Tier(200, 10, "silver"),
-    new Tier(500, 20, "gold"),
-    new Tier(1000, 50, "diamond"),
-];
-
 function createButtons(tier, price) {
     let shop = document.getElementsByClassName("shop")[0]
 
@@ -120,6 +110,7 @@ function addScore(amount, user, cursorStrenght) {
         if (user) {
             floating.style.top = (event.y - 25).toString() + "px";
             floating.style.left = event.x.toString() + "px";
+            floating.style.scale = strenght*0.4
         }
         else {
             let websiteWidth = window.innerWidth;
@@ -162,19 +153,9 @@ function addScore(amount, user, cursorStrenght) {
     }
 }
 
-function giftReward() {
-    let reward = rewards[Math.floor(Math.random() * rewards.length)]
-    if (typeof(reward) == "number") {
-        score += reward
-    } else if (reward.indexOf("x")) {
-        bonus = [parseInt(reward.substring(0, str.length - 1)), 60]
-    }
-}
-
 function spawnGift() {
     let gift = document.createElement('div');
 
-    gift.addEventListener("click", function(){giftReward();});
     gift.style.top = Math.floor(Math.random() * window.innerWidth).toString() + "px";
     gift.style.left = Math.floor(Math.random() * window.innerHeight).toString() + "px";
     
@@ -182,6 +163,21 @@ function spawnGift() {
     gift.style.position = 'absolute';
     gift.style.opacity = '1';
     gift.style.transition = 'all 2s linear';
+    gift.id = "gift"+giftId.toString()
+    gift.addEventListener("click", function(){ 
+        let reward = rewards[Math.floor(Math.random() * rewards.length)]
+        if (typeof(reward) == "number") {
+            score += reward
+            alert("+"+reward)
+        } else if (reward.indexOf("x")) {
+            bonus = [parseInt(reward.substring(0, reward.length - 1)), 60]
+            alert("strenght times"+reward.substring(0, reward.length - 1));
+        };
+        let element = document.getElementById("gift"+giftId.toString())
+        //wait 1 sec
+        new Promise(resolve => setTimeout(resolve, 1000));
+        element.remove()
+    });
     
     document.body.appendChild(gift);
 
@@ -194,6 +190,15 @@ function spawnGift() {
     });
 }
 
+const tiers = [
+    new Tier(15, 1, "wood"),
+    new Tier(50, 3, "stone"),
+    new Tier(100, 5, "iron"),
+    new Tier(200, 10, "silver"),
+    new Tier(500, 20, "gold"),
+    new Tier(1000, 50, "diamond"),
+];
+
 setInterval(function() {
         strenght = 1
         for (let i = 0; i <= tiers.length-1; i++) {
@@ -202,7 +207,7 @@ setInterval(function() {
 
         if (bonus[1] > 0) {
             strenght *= bonus[0]
-            bonus[0] -= 1 
+            bonus[1] -= 1 
         }
 
         for (let i = 0; i <= tiers.length-1; i++) {
@@ -213,7 +218,7 @@ setInterval(function() {
 
 setInterval(function() {
     document.getElementById("capyImg").src = "../imgs/"+capys[Math.floor(Math.random() * capys.length)]
-    if (Math.floor(Math.random() * 100) > 1) {
-        //spawnGift();
+    if (Math.floor(Math.random() * 100) > 90) {
+        spawnGift();
     }
 }, 60000)
